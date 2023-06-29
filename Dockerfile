@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y software-properties-common
 # Añade el repositorio 'openjdk-r'
 RUN add-apt-repository -y ppa:openjdk-r/ppa
 
-# Actualiza nuevamente e instala OpenJDK 7
-RUN apt-get update && apt-get install -y openjdk-7-jdk
+# Actualiza nuevamente e instala OpenJDK 8
+RUN apt-get update && apt-get install -y openjdk-8-jdk
 
 # Crear usuario glassfish con permisos de superusuario
 RUN useradd -m -s /bin/bash glassfish && echo "glassfish:glassfish" | chpasswd && adduser glassfish sudo
@@ -21,7 +21,7 @@ ENV TZ=America/Argentina/Buenos_Aires
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Configurar variables de entorno de Java
-ENV JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV PATH=$PATH:$JAVA_HOME/bin
 
 # Descargar e instalar GlassFish
