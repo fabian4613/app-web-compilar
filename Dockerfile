@@ -2,7 +2,7 @@
 FROM ubuntu:18.04
 
 # Actualizar el sistema e instalar las utilidades necesarias
-RUN apt-get update && apt-get install -y wget unzip openjdk-7-jdk sudo
+RUN apt-get update && apt-get install -y wget unzip sudo
 
 # Crear usuario glassfish con permisos de superusuario
 RUN useradd -m -s /bin/bash glassfish && echo "glassfish:glassfish" | chpasswd && adduser glassfish sudo
@@ -10,6 +10,13 @@ RUN useradd -m -s /bin/bash glassfish && echo "glassfish:glassfish" | chpasswd &
 # Establecer la zona horaria a Buenos Aires
 ENV TZ=America/Argentina/Buenos_Aires
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Agrega tu archivo tar.gz de Java al contenedor
+ADD jdk-8u144-linux-x64.tar.gz /opt
+
+# Configurar variables de entorno de Java
+ENV JAVA_HOME=/opt/jdk1.8.0_144
+ENV PATH=$PATH:$JAVA_HOME/bin
 
 # Descargar e instalar GlassFish
 RUN wget https://download.oracle.com/glassfish/3.1.2.2/release/glassfish-3.1.2.2.zip \
