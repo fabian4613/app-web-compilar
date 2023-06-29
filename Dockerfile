@@ -1,8 +1,11 @@
 # Dockerfile
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
-# Actualizar el sistema e instalar las utilidades necesarias
-RUN apt-get update && apt-get install -y wget unzip sudo
+# Actualiza el sistema e instala Java 7
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    openjdk-7-jre-headless=7u51-2.4.6-1ubuntu4 \
+    openjdk-7-jre=7u51-2.4.6-1ubuntu4 \
+    openjdk-7-jdk=7u51-2.4.6-1ubuntu4
 
 # Crear usuario glassfish con permisos de superusuario
 RUN useradd -m -s /bin/bash glassfish && echo "glassfish:glassfish" | chpasswd && adduser glassfish sudo
