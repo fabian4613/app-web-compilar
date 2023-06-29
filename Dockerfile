@@ -11,8 +11,10 @@ RUN useradd -m -s /bin/bash glassfish && echo "glassfish:glassfish" | chpasswd &
 ENV TZ=America/Argentina/Buenos_Aires
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-# Agrega tu archivo tar.gz de Java al contenedor
-ADD jdk-8u144-linux-x64.tar.gz /opt
+# Descarga tu archivo tar.gz de Java en el contenedor
+RUN wget -P /opt https://packages.baidu.com/app/jdk-8/jdk-8u144-linux-x64.tar.gz && \
+    tar zxvf /opt/jdk-8u144-linux-x64.tar.gz -C /opt && \
+    rm /opt/jdk-8u144-linux-x64.tar.gz
 
 # Configurar variables de entorno de Java
 ENV JAVA_HOME=/opt/jdk1.8.0_144
