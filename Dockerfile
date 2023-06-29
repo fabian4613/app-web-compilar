@@ -2,7 +2,7 @@
 FROM ubuntu:18.04
 
 # Actualizar el sistema e instalar las utilidades necesarias
-RUN apt-get update && apt-get install -y wget unzip openjdk-8-jdk sudo
+RUN apt-get update && apt-get install -y wget unzip openjdk-7-jdk sudo
 
 # Crear usuario glassfish con permisos de superusuario
 RUN useradd -m -s /bin/bash glassfish && echo "glassfish:glassfish" | chpasswd && adduser glassfish sudo
